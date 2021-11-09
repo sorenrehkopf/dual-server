@@ -1,7 +1,7 @@
-const Query = require('./Query.js');
-const User = require('./User.js');
+import Query from './Query.js';
+import User from './User.js';
 
-module.exports = [
+export default [
 	Query,
 	User
 ];

@@ -1,7 +1,9 @@
-const { ApolloServer, gql } = require('apollo-server');
+import { ApolloServer, gql } from 'apollo-server';
 
-module.exports = gql`
+const Query = gql`
   type Query {
     user : User
   }
 `;
+
+export default Query;

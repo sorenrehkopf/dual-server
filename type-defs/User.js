@@ -1,6 +1,6 @@
-const { ApolloServer, gql } = require('apollo-server');
+import { ApolloServer, gql } from 'apollo-server';
 
-module.exports = gql`
+export default gql`
   type User {
     authenticated: Boolean
     name: String

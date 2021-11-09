@@ -1,6 +1,6 @@
-const user = require('./user.js');
+import user from './user.js';
 
-module.exports = {
+export default {
 	Query: {
 		user
 	}
