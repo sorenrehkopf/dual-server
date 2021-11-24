@@ -8,7 +8,9 @@ const signupResolver = async (_parent, args, context) => {
 			name,
 			email,
 			password
-		});
+		}).then(async () => await models.User.findOne({
+			where: { email }
+		}))
 	} catch(e) {
 		console.error('An error!', e)
 		throw new Error(e);

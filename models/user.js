@@ -1,4 +1,5 @@
 import sequelize from 'sequelize';
+import bcrypt from 'bcrypt';
 const { Model } = sequelize;
 
 export default (sequelize, DataTypes) => {
@@ -11,13 +12,46 @@ export default (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
     }
+
+    async hashPassword() {
+      const saltRounds = 10;
+      this.password = await bcrypt.hash(this.password, saltRounds);
+    }
   };
+
   User.init({
-    name: DataTypes.STRING,
+    name: {
+      type: DataTypes.STRING,
+      unique: true,
+      allowNull: false,
+      validate: {
+        notEmpty: true,
+      },
+    },
+    email: {
+      type: DataTypes.STRING,
+      unique: true,
+      allowNull: false,
+      validate: {
+        notEmpty: true,
+        isEmail: true,
+      },
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: true,
+        len: [7,]
+      },
+    },
     pronouns: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'User',
   });
+
+  User.beforeCreate(async user => await user.hashPassword());
+
   return User;
 };
