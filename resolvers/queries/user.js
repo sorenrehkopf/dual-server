@@ -1,5 +1,5 @@
 const userResolver = () => ({
-	authenticated: true,
+	authenticated: false,
 	name: 'USer face!',
 	pronouns: 'The Pronouns!'
 });

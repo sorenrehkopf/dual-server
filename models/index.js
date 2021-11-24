@@ -2,8 +2,17 @@ import Sequelize from 'sequelize';
 //Models
 import User from './user.js';
 
+const sequelize = new Sequelize(
+  process.env.DATABASE,
+  process.env.DATABASE_USER,
+  process.env.DATABASE_PASSWORD,
+  {
+    dialect: 'postgres',
+  },
+);
+
 const models = {
-  User,
+  User: User(sequelize, Sequelize.DataTypes, Sequelize.model),
 };
 
 Object.keys(models).forEach(key => {

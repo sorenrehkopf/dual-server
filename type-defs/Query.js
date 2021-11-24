@@ -2,7 +2,7 @@ import { ApolloServer, gql } from 'apollo-server';
 
 const Query = gql`
   type Query {
-    user : User
+    currentUser : User
   }
 `;
 
