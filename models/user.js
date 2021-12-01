@@ -12,11 +12,6 @@ export default (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
     }
-
-    async hashPassword() {
-      const saltRounds = 10;
-      this.password = await bcrypt.hash(this.password, saltRounds);
-    }
   };
 
   User.init({
@@ -50,8 +45,6 @@ export default (sequelize, DataTypes) => {
     sequelize,
     modelName: 'User',
   });
-
-  User.beforeCreate(async user => await user.hashPassword());
 
   return User;
 };
