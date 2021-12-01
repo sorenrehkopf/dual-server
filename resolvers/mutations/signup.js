@@ -1,4 +1,4 @@
-import models from '../../models/index.js';
+import models from 'models/index.js';
 
 const signupResolver = async (_parent, args, context) => {
 	const { name, email, password } = args;
@@ -12,7 +12,6 @@ const signupResolver = async (_parent, args, context) => {
 			where: { email }
 		}))
 	} catch(e) {
-		console.error('An error!', e)
 		throw new Error(e);
 	}
 };
