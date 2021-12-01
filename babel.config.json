@@ -1,16 +1,18 @@
 {
 	"presets": ["@babel/preset-env"],
 	"plugins": [
-		["@babel/transform-runtime"],
 		[
 			"module-resolver",
 			{
 				"root": ["."],
+				"cwd": "packagejson",
 				"alias": {
-					"models": "./models",
-					"resolvers": "./resolvers"
+					"@models": "./models",
+					"@resolvers": "./resolvers",
+					"@typedefs": "./type-defs"
 				}
 			}
-		]
+		],
+		["@babel/transform-runtime"]
 	]
 }

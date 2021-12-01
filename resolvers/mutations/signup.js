@@ -1,5 +1,6 @@
 import bcrypt from 'bcrypt';
-import models from 'models/index.js';
+import jwt from 'jsonwebtoken';
+import models from '../../models/index.js';
 
 export const saltRounds = 10;
 
@@ -12,8 +13,8 @@ const signupResolver = async (_parent, args, context) => {
 			name,
 			email,
 			password: hashedPassword
-		}).then(async () => await models.User.findOne({
-			where: { email }
+		}).then(async () => ({
+			token: await jwt.sign({ email }, process.env.JWTSECRET)
 		}))
 	} catch(e) {
 		throw new Error(e);
