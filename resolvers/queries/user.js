@@ -1,7 +1,13 @@
-const userResolver = () => ({
+const dummyUser = {
 	authenticated: false,
-	name: 'USer face!',
-	pronouns: 'The Pronouns!'
-});
+	name: 'Friend',
+	email: null
+};
 
-export default userResolver;
+const currentUserResolver = async (_parent, args, context) => {
+	const { currentUser } = context;
+
+	return currentUser || dummyUser;
+};
+
+export default currentUserResolver;

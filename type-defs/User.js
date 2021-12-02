@@ -5,6 +5,5 @@ export default gql`
     authenticated: Boolean
     name: String
     email: String
-    pronouns: String
   }
 `;

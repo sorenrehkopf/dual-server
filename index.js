@@ -4,7 +4,10 @@ import { ApolloServer } from 'apollo-server';
 import typeDefs from './type-defs/index.js';
 import resolvers from './resolvers/index.js';
 
-const server = new ApolloServer({ typeDefs, resolvers });
+const server = new ApolloServer({
+	typeDefs,
+	resolvers,
+});
 
 sequelize.sync().then(() => {
 	console.log('Database initialized.');
