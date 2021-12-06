@@ -14,7 +14,7 @@ const signupResolver = async (_parent, args, context) => {
 			email,
 			password: hashedPassword
 		}).then(async () => ({
-			token: await jwt.sign({ email }, process.env.JWTSECRET)
+			token: await jwt.sign({ name, email }, process.env.JWTSECRET)
 		}))
 	} catch(e) {
 		throw new Error(e);
