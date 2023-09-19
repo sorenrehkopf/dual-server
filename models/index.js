@@ -1,6 +1,7 @@
 import Sequelize from 'sequelize';
 //Models
 import User from './user.js';
+import Resource from './resource.js'
 
 const sequelize = new Sequelize(
   process.env.DATABASE,
@@ -13,6 +14,7 @@ const sequelize = new Sequelize(
 
 const models = {
   User: User(sequelize, Sequelize.DataTypes, Sequelize.model),
+  Resource: Resource(sequelize, Sequelize.DataTypes, Sequelize.model),
 };
 
 Object.keys(models).forEach(key => {

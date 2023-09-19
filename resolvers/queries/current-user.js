@@ -1,4 +1,3 @@
-
 const currentUserResolver = async (_parent, args, context) => {
 	const { currentUser } = context;
 
