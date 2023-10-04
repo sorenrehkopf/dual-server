@@ -5,8 +5,6 @@ const { Resource } = models;
 const resourcesResolver = async (_parent, args, context) => {
   const resources = await Resource.findAll();
 
-  console.log('woah!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!', resources)
-
   return resources;
 };
 
