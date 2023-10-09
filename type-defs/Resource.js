@@ -7,5 +7,6 @@ export default gql`
     address: String
     lat: Float
     lon: Float
+    distance: Float
   }
 `;
