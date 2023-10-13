@@ -1,5 +1,6 @@
 'use strict';
 import sequelize from 'sequelize';
+import pickBy from 'lodash/pickBy.js'
 const { Model } = sequelize;
 
 const GEO_MILES = 3959
@@ -38,12 +39,12 @@ export default (sequelize, DataTypes) => {
             )
         )`;
 
-        return {
+        return pickBy({
             attributes: [
                 [sequelize.literal(haversine), 'distance'],
             ],
-            where: sequelize.literal(`${haversine} <= ${distance}`)
-        }
+            where: !!distance && sequelize.literal(`${haversine} <= ${distance}`)
+        })
       }
     }
   });
