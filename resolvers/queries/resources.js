@@ -9,7 +9,6 @@ const resourcesResolver = async (_parent, args, context) => {
   const { lat, lon, bounds, maxDistance = 5 } = args;
   const { n, s, e, w } = bounds || {}
 
-  console.log('the bounds!', bounds)
   const resources = await Resource.scope({
     method: compact(['withDistance', lat, lon, !bounds && maxDistance])
   }).findAll(pickBy({

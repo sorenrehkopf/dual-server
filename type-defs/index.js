@@ -4,6 +4,7 @@ import Mutation from './Mutation.js';
 import AuthResponse from './AuthResponse.js';
 import User from './User.js';
 import Resource from './Resource.js'
+import Tag from './Tag.js'
 import GeoBounds from './GeoBounds.js'
 
 export default [
@@ -12,5 +13,6 @@ export default [
 	AuthResponse,
 	User,
 	Resource,
+	Tag,
 	GeoBounds,
 ];
