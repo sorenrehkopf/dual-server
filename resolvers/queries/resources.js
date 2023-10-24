@@ -2,12 +2,14 @@ import Sequelize from 'sequelize'
 import models, { sequelize } from '../../models/index.js'
 import compact from 'lodash/compact.js'
 import pickBy from 'lodash/pickBy.js'
-const { Resource } = models;
+const { Resource, Tag } = models;
 const { Op } = Sequelize;
 
 const resourcesResolver = async (_parent, args, context) => {
   const { lat, lon, bounds, maxDistance = 5 } = args;
   const { n, s, e, w } = bounds || {}
+
+  console.log('yooooooooooooooooooooooooooooo')
 
   const resources = await Resource.scope({
     method: compact(['withDistance', lat, lon, !bounds && maxDistance])
@@ -15,6 +17,7 @@ const resourcesResolver = async (_parent, args, context) => {
     benchmark: true,
     attributes: ['name', 'description', 'address', 'lat', 'lon', 'distance'],
     order: sequelize.col('distance'),
+    include: [Tag],
     where: !!bounds && {
       [Op.and]: [
         { lat: { [Op.between]: [s, n] } },
@@ -24,7 +27,8 @@ const resourcesResolver = async (_parent, args, context) => {
   }));
 
   console.log(
-    resources.map(({ dataValues: { lat, lon } }) => `${lat} - ${lon}`)
+    'the resources!!!!!!!!!!!!!!!!!!',
+    resources.map(({ dataValues }) => dataValues)
   )
 
   return resources;

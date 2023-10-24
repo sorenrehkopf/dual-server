@@ -8,5 +8,6 @@ export default gql`
     lat: Float
     lon: Float
     distance: Float
+    tags: [Tag]
   }
 `;
