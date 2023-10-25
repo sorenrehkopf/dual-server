@@ -13,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   }
+
   ResourceTag.init({
     resourceId: DataTypes.INTEGER,
     tagId: DataTypes.INTEGER
@@ -20,5 +21,6 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'ResourceTag',
   });
+
   return ResourceTag;
 };

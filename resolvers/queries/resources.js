@@ -9,15 +9,18 @@ const resourcesResolver = async (_parent, args, context) => {
   const { lat, lon, bounds, maxDistance = 5 } = args;
   const { n, s, e, w } = bounds || {}
 
-  console.log('yooooooooooooooooooooooooooooo')
-
   const resources = await Resource.scope({
     method: compact(['withDistance', lat, lon, !bounds && maxDistance])
   }).findAll(pickBy({
     benchmark: true,
-    attributes: ['name', 'description', 'address', 'lat', 'lon', 'distance'],
+    attributes: ['id', 'name', 'description', 'address', 'lat', 'lon', 'distance'],
     order: sequelize.col('distance'),
-    include: [Tag],
+    include: [
+      {
+        model: Tag,
+        as: 'tags',
+      },
+    ],
     where: !!bounds && {
       [Op.and]: [
         { lat: { [Op.between]: [s, n] } },

@@ -14,7 +14,7 @@ export default (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      this.belongsToMany(models.Tag, { through: 'ResourceTags', foreignKey: 'tagId' })
+      this.belongsToMany(models.Tag, { through: 'ResourceTags', foreignKey: 'resourceId', as: 'tags' })
     }
   };
   Resource.init({

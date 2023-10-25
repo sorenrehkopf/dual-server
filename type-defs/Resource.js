@@ -2,6 +2,7 @@ import { gql } from 'apollo-server';
 
 export default gql`
   type Resource {
+    id: ID
     name: String
     description: String
     address: String

@@ -11,7 +11,7 @@ export default (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      this.belongsToMany(models.Resource, { through: 'ResourceTags', foreignKey: 'resourceId' })
+      this.belongsToMany(models.Resource, { through: 'ResourceTags', foreignKey: 'tagId' })
     }
   }
 
