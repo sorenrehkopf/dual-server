@@ -6,7 +6,7 @@ const { Resource, Tag } = models;
 const { Op } = Sequelize;
 
 const resourcesResolver = async (_parent, args, context) => {
-  const { lat, lon, bounds, maxDistance = 5 } = args;
+  const { lat, lon, bounds, maxDistance = 5, tags } = args;
   const { n, s, e, w } = bounds || {}
 
   const resources = await Resource.scope({
@@ -16,10 +16,14 @@ const resourcesResolver = async (_parent, args, context) => {
     attributes: ['id', 'name', 'description', 'address', 'lat', 'lon', 'distance'],
     order: sequelize.col('distance'),
     include: [
-      {
+      pickBy({
         model: Tag,
         as: 'tags',
-      },
+        where: !!tags && {
+          name: tags
+        },
+        required: !!tags,
+      }),
     ],
     where: !!bounds && {
       [Op.and]: [
