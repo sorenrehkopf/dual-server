@@ -6,8 +6,10 @@ const { Resource, Tag } = models;
 const { Op } = Sequelize;
 
 const resourcesResolver = async (_parent, args, context) => {
-  const { lat, lon, bounds, maxDistance = 5, tags } = args;
+  const { lat, lon, bounds, maxDistance = 5, tags, open } = args;
   const { n, s, e, w } = bounds || {}
+
+  console.log('yeah!!!!!!!!', open)
 
   const resources = await Resource.scope({
     method: compact(['withDistance', lat, lon, !bounds && maxDistance])
