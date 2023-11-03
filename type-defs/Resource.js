@@ -10,5 +10,6 @@ export default gql`
     lon: Float
     distance: Float
     tags: [Tag]
+    schedule: [Availability]
   }
 `;
