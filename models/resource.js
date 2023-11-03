@@ -15,6 +15,7 @@ export default (sequelize, DataTypes) => {
      */
     static associate(models) {
       this.belongsToMany(models.Tag, { through: 'ResourceTags', foreignKey: 'resourceId', as: 'tags' })
+      this.hasMany(models.Availability, { foreignKey: 'resourceId', as: 'schedule' })
     }
   };
   Resource.init({

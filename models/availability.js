@@ -1,9 +1,9 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
-module.exports = (sequelize, DataTypes) => {
-  class Schedule extends Model {
+import sequelize from 'sequelize';
+const { Model } = sequelize;
+
+export default (sequelize, DataTypes) => {
+  class Availability extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -11,9 +11,10 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      this.belongsTo(models.Resource, { as: 'resource' })
     }
   }
-  Schedule.init({
+  Availability.init({
     resourceId: DataTypes.INTEGER,
     type: DataTypes.ENUM('once', 'weekly', 'monthly', 'rotating', 'cancellation'),
     startDatetime: DataTypes.DATE,
@@ -24,7 +25,8 @@ module.exports = (sequelize, DataTypes) => {
     endTime: DataTypes.TIME
   }, {
     sequelize,
-    modelName: 'Schedule',
+    modelName: 'Availability',
+    tableName: 'Availabilities',
   });
-  return Schedule;
+  return Availability;
 };

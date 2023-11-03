@@ -2,7 +2,7 @@ import Sequelize from 'sequelize'
 import models, { sequelize } from '../../models/index.js'
 import compact from 'lodash/compact.js'
 import pickBy from 'lodash/pickBy.js'
-const { Resource, Tag } = models;
+const { Resource, Tag, Availability } = models;
 const { Op } = Sequelize;
 
 const resourcesResolver = async (_parent, args, context) => {
@@ -10,6 +10,12 @@ const resourcesResolver = async (_parent, args, context) => {
   const { n, s, e, w } = bounds || {}
 
   console.log('yeah!!!!!!!!', open)
+
+  const date = open ? new Date(open[0]) : new Date()
+
+  console.log('more!!!!!!!!', date.getDay())
+
+  date.setDate(6)
 
   const resources = await Resource.scope({
     method: compact(['withDistance', lat, lon, !bounds && maxDistance])
@@ -25,6 +31,17 @@ const resourcesResolver = async (_parent, args, context) => {
           name: tags
         },
         required: !!tags,
+      }),
+      pickBy({
+        model: Availability,
+        as: 'schedule',
+        where: !!open && {
+          [Op.or] : {
+            weekday: date.getDay(),
+
+          },
+        },
+        required: !!open,
       }),
     ],
     where: !!bounds && {
