@@ -18,8 +18,8 @@ module.exports = {
         resourceId: 2,
         type: 'weekly',
         weekday: 1,
-        startTime: '16:00:00.000Z',
-        endTime: '00:00:00.000Z'
+        startTime: '09:00:00-0800',
+        endTime: '17:00:0-0800'
       },
       {
         createdAt: new Date(),
@@ -27,8 +27,8 @@ module.exports = {
         resourceId: 41,
         type: 'weekly',
         weekday: 2,
-        startTime: '16:00:00.000Z',
-        endTime: '00:00:00.000Z',
+        startTime: '09:00:00-0800',
+        endTime: '17:00:00-0800',
       },
       {
         createdAt: new Date(),
@@ -36,8 +36,8 @@ module.exports = {
         resourceId: 6,
         type: 'weekly',
         weekday: 3,
-        startTime: '16:00:00.000Z',
-        endTime: '00:00:00.000Z',
+        startTime: '09:00:00-0800',
+        endTime: '17:00:00-0800',
       },
       {
         createdAt: new Date(),
@@ -45,8 +45,8 @@ module.exports = {
         resourceId: 4,
         type: 'weekly',
         weekday: 4,
-        startTime: '16:00:00.000Z',
-        endTime: '00:00:00.000Z',
+        startTime: '09:00:00-0800',
+        endTime: '17:00:00-0800',
       },
       {
         createdAt: new Date(),
@@ -54,8 +54,8 @@ module.exports = {
         resourceId: 5,
         type: 'weekly',
         weekday: 5,
-        startTime: '16:00:00.000Z',
-        endTime: '02:00:00.000Z',
+        startTime: '09:00:00-0800',
+        endTime: '17:00:00-0800',
       },
     ]);
   },

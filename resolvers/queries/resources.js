@@ -12,10 +12,7 @@ const resourcesResolver = async (_parent, args, context) => {
   console.log('yeah!!!!!!!!', open)
 
   const date = open ? new Date(open[0]) : new Date()
-
-  console.log('more!!!!!!!!', date.getDay())
-
-  date.setDate(6)
+  const timeStringWZone = date.toTimeString().replace(/\sGMT/ig, '').replace(/ *\([^)]*\) */g, '')
 
   const resources = await Resource.scope({
     method: compact(['withDistance', lat, lon, !bounds && maxDistance])
@@ -36,10 +33,19 @@ const resourcesResolver = async (_parent, args, context) => {
         model: Availability,
         as: 'schedule',
         where: !!open && {
-          [Op.or] : {
-            weekday: date.getDay(),
-
-          },
+          [Op.or]: [
+            {
+              [Op.and] : {
+                weekday: date.getDay(),
+                startTime: {
+                  [Op.lt]: timeStringWZone
+                },
+                endTime: {
+                  [Op.gt]: timeStringWZone
+                }
+              },
+            }
+          ]
         },
         required: !!open,
       }),
