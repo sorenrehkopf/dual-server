@@ -8,7 +8,12 @@ import addCurrentUserToContext from './middleware/add-current-user-to-context.js
 const server = new ApolloServer({
 	typeDefs,
 	resolvers,
-	context: addCurrentUserToContext
+	context: addCurrentUserToContext,
+	formatError: (error) => {
+		console.error(error)
+
+		return error
+	}
 });
 
 sequelize.sync().then(() => {
