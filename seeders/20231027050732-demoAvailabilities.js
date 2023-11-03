@@ -57,6 +57,14 @@ module.exports = {
         startTime: '09:00:00-0800',
         endTime: '17:00:00-0800',
       },
+      {
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        resourceId: 3,
+        type: 'once',
+        startDatetime: '2023-11-08 08:00:00-0800',
+        endDatetime: '2023-11-08 22:00:00-0800',
+      },
     ]);
   },
 

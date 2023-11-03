@@ -8,9 +8,6 @@ const { Op } = Sequelize;
 const resourcesResolver = async (_parent, args, context) => {
   const { lat, lon, bounds, maxDistance = 5, tags, open } = args;
   const { n, s, e, w } = bounds || {}
-
-  console.log('yeah!!!!!!!!', open)
-
   const date = open ? new Date(open[0]) : new Date()
   const timeStringWZone = date.toTimeString().replace(/\sGMT/ig, '').replace(/ *\([^)]*\) */g, '')
 
@@ -44,7 +41,17 @@ const resourcesResolver = async (_parent, args, context) => {
                   [Op.gt]: timeStringWZone
                 }
               },
-            }
+            },
+            {
+              [Op.and] : {
+                startDatetime: {
+                  [Op.lt]: date
+                },
+                endDatetime: {
+                  [Op.gt]: date
+                }
+              },
+            },
           ]
         },
         required: !!open,
