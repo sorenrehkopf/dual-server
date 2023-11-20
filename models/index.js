@@ -4,6 +4,7 @@ import User from './user.js';
 import Resource from './resource.js'
 import Tag from './tag.js'
 import Availability from './availability.js'
+import ResourceTag from './resourcetag.js'
 
 const sequelize = new Sequelize(
   process.env.DATABASE,
@@ -19,6 +20,7 @@ const models = {
   Resource: Resource(sequelize, Sequelize.DataTypes, Sequelize.model),
   Tag: Tag(sequelize, Sequelize.DataTypes, Sequelize.model),
   Availability: Availability(sequelize, Sequelize.DataTypes, Sequelize.model),
+  ResourceTag: ResourceTag(sequelize, Sequelize.DataTypes, Sequelize.model),
 };
 
 Object.keys(models).forEach(key => {
