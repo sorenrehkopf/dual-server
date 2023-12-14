@@ -3,7 +3,7 @@ import models from '../../models/index.js';
 export const saltRounds = 10;
 
 const addResourceResolver = async (_parent, args, context) => {
-	const { lat, lon, name, description, address, tags: tagNames } = args
+	const { lat, lon, name, description, address, tags: tagNames, schedule } = args
 
 	try {
 		const tags = await models.Tag.findAll({
@@ -25,6 +25,13 @@ const addResourceResolver = async (_parent, args, context) => {
 			return models.ResourceTag.create({ resourceId, tagId })
 		}))
 
+		const availabilities = await Promise.all(schedule.map((availabilityData) => {
+			return models.Availability.create({
+				...availabilityData,
+				resourceId,
+			})
+		}))
+
 		return {
 			lat,
 			lon,
@@ -32,6 +39,7 @@ const addResourceResolver = async (_parent, args, context) => {
 			description,
 			address,
 			tags: tagNames.map(name => ({ name })),
+			schedule: availabilities
 		}
 	} catch(e) {
 		throw new Error(e);

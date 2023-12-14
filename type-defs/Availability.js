@@ -12,4 +12,15 @@ export default gql`
     startTime: String
     endTime: String
   }
+
+  input AvailabilityInput {
+    id: ID
+    type: String
+    startDatetime: String
+    endDatetime: String
+    weekday: Int
+    interval: Int
+    startTime: String
+    endTime: String
+  }
 `;
